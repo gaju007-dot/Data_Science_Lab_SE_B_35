@@ -25,3 +25,5 @@ depth = 3
 result = minimax(0, depth, True, values)
 
 print("Optimal value (using Minimax):", result)
+
+Optimal value (using Minimax): 5
