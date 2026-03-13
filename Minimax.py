@@ -1,79 +1,27 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": [],
-      "authorship_tag": "ABX9TyNJiszrkw6B3wwzY3i9SKid",
-      "include_colab_link": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/gaju007-dot/Data_Science_Lab_SE_B_35/blob/main/Minimax.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": 1,
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "K6jLBlzj7R18",
-        "outputId": "943e565a-a073-4ded-b8dd-4929623de58d"
-      },
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "Optimal value (using Minimax): 5\n"
-          ]
-        }
-      ],
-      "source": [
-        "def minimax(node, depth, maximizingPlayer, values, index=0):\n",
-        "    # Leaf node condition\n",
-        "    if depth == 0 or index >= len(values):\n",
-        "        return values[index]\n",
-        "\n",
-        "    if maximizingPlayer:\n",
-        "        best = float('-inf')\n",
-        "        # Two children for each node\n",
-        "        for i in range(2):\n",
-        "            val = minimax(node*2 + i, depth-1, False, values, index*2 + i)\n",
-        "            best = max(best, val)\n",
-        "        return best\n",
-        "    else:\n",
-        "        best = float('inf')\n",
-        "        for i in range(2):\n",
-        "            val = minimax(node*2 + i, depth-1, True, values, index*2 + i)\n",
-        "            best = min(best, val)\n",
-        "        return best\n",
-        "\n",
-        "\n",
-        "# Example: Game tree with depth = 3\n",
-        "values = [3, 5, 6, 9, 1, 2, 0, -1]  # Leaf node values\n",
-        "depth = 3\n",
-        "\n",
-        "result = minimax(0, depth, True, values)\n",
-        "\n",
-        "print(\"Optimal value (using Minimax):\", result)"
-      ]
-    }
-  ]
-}
+def minimax(node, depth, maximizingPlayer, values, index=0):
+    # Leaf node condition
+    if depth == 0 or index >= len(values):
+        return values[index]
+
+    if maximizingPlayer:
+        best = float('-inf')
+        # Two children for each node
+        for i in range(2):
+            val = minimax(node*2 + i, depth-1, False, values, index*2 + i)
+            best = max(best, val)
+        return best
+    else:
+        best = float('inf')
+        for i in range(2):
+            val = minimax(node*2 + i, depth-1, True, values, index*2 + i)
+            best = min(best, val)
+        return best
+
+
+# Example: Game tree with depth = 3
+values = [3, 5, 6, 9, 1, 2, 0, -1]  # Leaf node values
+depth = 3
+
+result = minimax(0, depth, True, values)
+
+print("Optimal value (using Minimax):", result)
